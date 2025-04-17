@@ -1,0 +1,94 @@
+/* Sidebar container */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Hidden by default */
+    width: 300px;
+    height: 100%;
+    background-color: var(--color-secondary);
+    border-left: 2px solid var(--color-border);
+    padding: 20px;
+    transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth slide-in effect */
+    z-index: 1000;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.sidebar.active {
+    right: 0; /* Slide in when active */
+}
+
+/* Close button */
+.close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--color-text);
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* Sidebar header */
+h2 {
+    margin-bottom: 20px;
+    color: var(--color-primary);
+}
+
+/* Shortcut list */
+.shortcut-list {
+    list-style: none;
+    padding: 0;
+}
+
+.shortcut-item {
+    margin-bottom: 15px;
+}
+
+.shortcut-item a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.shortcut-item a:hover {
+    color: var(--color-accent);
+}
+
+/* Authentication buttons */
+.auth-buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth-button {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    background-color: var(--color-primary);
+    transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+    background-color: var(--color-accent);
+}
+
+.login-button {
+    background-color: var(--color-primary);
+}
+
+.register-button {
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+}
+
+.register-button:hover {
+    background-color: var(--color-accent);
+    color: white;
+}
