@@ -1,5 +1,6 @@
 import Wrapper from "../components/wrapper";
 import AuthForm from "../components/Authform";
+import '../styles/Register.css';
 
 const Register = () => {
     return(
