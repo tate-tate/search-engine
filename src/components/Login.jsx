@@ -16,6 +16,7 @@ const Login = () => {
         e.preventDefault();
         console.log('Login form submitted:', formData);
         // Add logic to authenticate with the backend later
+        
     };
 
     return (
