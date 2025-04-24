@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { fetchSearchResults } from '../api/googleSearch';
 import Sidebar from '../components/Sidebar';
+import ShortcutEdit from '../components/ShortcutEdit';
+import { AuthContext } from '../components/AuthContext';
 import '../styles/SearchPage.css';
 
 const SearchPage = () => {
@@ -9,6 +11,8 @@ const SearchPage = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isEditingShortcuts, setIsEditingShortcuts] = useState(false);
+    const { isLogin, logout } = useContext(AuthContext);
 
     const shortcuts = [
         { name: 'Google', link: 'https://www.google.com' },
@@ -35,12 +39,27 @@ const SearchPage = () => {
         <div className="search-page">
             <header className="search-header">
                 <h1>Questor - A Search Engine</h1>
-                <button
-                    className="shortcuts-button"
-                    onClick={() => setIsSidebarOpen(true)}
-                >
-                    Shortcuts
-                </button>
+                <div className="header-buttons">
+                    <button
+                        className="shortcuts-button"
+                        onClick={() => setIsSidebarOpen(true)}
+                    >
+                        Shortcuts
+                    </button>
+                    {isLogin && (
+                        <button
+                            className="edit-shortcuts-button"
+                            onClick={() => setIsEditingShortcuts(true)}
+                        >
+                            Edit Shortcuts
+                        </button>
+                    )}
+                    {isLogin && (
+                        <button className="logout-button" onClick={logout}>
+                            Logout
+                        </button>
+                    )}
+                </div>
             </header>
             <form onSubmit={handleSearch} className="search-form">
                 <input
@@ -68,6 +87,15 @@ const SearchPage = () => {
                     </div>
                 ))}
             </div>
+
+            {isEditingShortcuts && (
+                <ShortcutEdit
+                    shortcuts={shortcuts}
+                    setShortcuts={setShortcuts}
+                    isLoggedIn={isLogin}
+                    onClose={() => setIsEditingShortcuts(false)}
+                />
+            )}
 
             <Sidebar
                 isOpen={isSidebarOpen}

@@ -1,6 +1,6 @@
 import React from 'react';
-import Wrapper from '../components/Wrapper';
-import AuthForm from '../components/AuthForm';
+import Wrapper from './Wrapper';
+import AuthForm from './Authform';
 import { Link } from 'react-router-dom'; // Ensure correct import for routing
 
 const Register = () => {

@@ -22,13 +22,13 @@ const AuthForm = ({ isRegister = false }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmited(true);
-
+    
         const formData = new FormData(e.target);
         formData.append('username', data.username.trim());
         formData.append('password', data.password.trim());
         if (isRegister) formData.append('email', data.email.trim());
         formData.append('action', isRegister ? 'register' : 'login');
-
+    
         try {
             const response = await fetch(
                 'https://web.ics.purdue.edu/~shaverb/390final/auth.php',
@@ -37,7 +37,14 @@ const AuthForm = ({ isRegister = false }) => {
                     body: formData,
                 }
             );
-            const responseData = await response.json();
+    
+            // Log the response to debug
+            const textResponse = await response.text();
+            console.log('Server Response:', textResponse);
+    
+            // Attempt to parse JSON
+            const responseData = JSON.parse(textResponse);
+    
             if (responseData.success) {
                 setData({ username: '', password: '', email: '' });
                 setSuccessM(responseData.success);
