@@ -1,6 +1,7 @@
 import Wrapper from "../components/wrapper";
 import AuthForm from "../components/Authform";
 import { Link } from "react-router-dom";
+import '../styles/Login.css';
 
 const Login = () => {
     return(
