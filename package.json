@@ -3,6 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://tate-tate.github.io/search-engine",
+  "description": "A search engine for the web.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
