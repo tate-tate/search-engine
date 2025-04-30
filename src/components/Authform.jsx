@@ -48,7 +48,7 @@ const AuthForm = ({ isRegister = false }) => {
             if (responseData.success) {
                 setData({ username: '', password: '', email: '' });
                 setSuccessM(responseData.success);
-                login(); // Call login from context
+                login(data.username); // Call login from context
                 setError('');
                 navigate('/');
             } else {

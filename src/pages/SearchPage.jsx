@@ -12,13 +12,8 @@ const SearchPage = () => {
     const [error, setError] = useState(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isEditingShortcuts, setIsEditingShortcuts] = useState(false);
+    const [shortcuts, setShortcuts] = useState([]); // Added state for shortcuts
     const { isLogin, logout } = useContext(AuthContext);
-
-    const shortcuts = [
-        { name: 'Google', link: 'https://www.google.com' },
-        { name: 'GitHub', link: 'https://github.com' },
-        { name: 'Stack Overflow', link: 'https://stackoverflow.com' },
-    ];
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -90,8 +85,8 @@ const SearchPage = () => {
 
             {isEditingShortcuts && (
                 <ShortcutEdit
-                    shortcuts={shortcuts}
-                    setShortcuts={setShortcuts}
+                    shortcuts={shortcuts} // Pass shortcuts state
+                    setShortcuts={setShortcuts} // Pass setShortcuts function
                     isLoggedIn={isLogin}
                     onClose={() => setIsEditingShortcuts(false)}
                 />

@@ -1,13 +1,20 @@
 import { createContext, useState, useMemo, useCallback } from "react";
 
-export const AuthContext = createContext(); // Use a named export for AuthContext
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [isLogin, setIsLogin] = useState(localStorage.getItem("isLogin") === "true");
+    const [userID, setUserID] = useState(localStorage.getItem("userID")); // Retrieve userID from localStorage
 
-    const login = useCallback(() => {
+    console.log("AuthContext initialized. isLogin:", isLogin, "userID:", userID); // Debugging log
+    console.log("LocalStorage userID:", localStorage.getItem("userID")); // Debugging log
+
+    const login = useCallback((userID) => {
+        console.log("Login called with userID:", userID); // Debugging log
         setIsLogin(true);
+        setUserID(userID);
         localStorage.setItem("isLogin", "true");
+        localStorage.setItem("userID", userID); // Store userID in localStorage
     }, []);
 
     const logout = useCallback(() => {
@@ -16,19 +23,23 @@ export const AuthProvider = ({ children }) => {
             .then((data) => {
                 if (data.message) {
                     setIsLogin(false);
-                    localStorage.setItem("isLogin", "false");
+                    setUserID(null);
+                    localStorage.removeItem("isLogin");
+                    localStorage.removeItem("userID");
                 } else {
-                    console.log("Unexpected response:", data);
+                    console.error("Unexpected response during logout:", data);
                 }
             })
             .catch((error) => {
-                console.log("Logout failed:", error);
-                setIsLogin(false); // Fallback to ensure logout state
-                localStorage.setItem("isLogin", "false");
+                console.error("Logout failed:", error);
+                setIsLogin(false);
+                setUserID(null);
+                localStorage.removeItem("isLogin");
+                localStorage.removeItem("userID");
             });
     }, []);
 
-    const value = useMemo(() => ({ isLogin, login, logout }), [isLogin, login, logout]);
+    const value = useMemo(() => ({ isLogin, userID, login, logout }), [isLogin, userID, login, logout]);
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
