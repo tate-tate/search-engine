@@ -1,4 +1,4 @@
-import Wrapper from "../components/wrapper";
+import Wrapper from "../components/Wrapper";
 import AuthForm from "../components/Authform";
 import '../styles/Register.css';
 
